@@ -1,0 +1,56 @@
+{% extends 'layout.html' %} {% block head %} {% parent %} {% endblock %} {% block content %}
+
+<div class="container">
+    <h2>Administrador de archivos</h2>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">Inicio</a></li>
+        <li><a data-toggle="tab" href="#menu1">Agregar</a></li>
+        <li><a data-toggle="tab" href="#menu2">Listar</a></li>
+
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+        </div>
+        <div id="menu1" class="tab-pane fade">
+            <h3>Subir Archivos</h3>
+            <div class="form">
+                <form action="archivos" method="post" enctype="multipart/form-data">
+
+                    <input type="file" name="files" multiple="">
+                    <textarea placeholder="Tus metadatos" name='descripcion' value='{{archivo.descripcion}}'></textarea>
+                    <input type="submit" value="Enviar">
+                </form>
+            </div>
+        </div>
+        <div id="menu2" class="tab-pane fade">
+            <h3>Lista de Archivos</h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Descripcion</th>
+                        <th>Tipo</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in archivos">
+                        <td>[[x.descripcion]]</td>
+                        <td>[[x.path]]</td>
+                        <td>
+                            <input type="checkbox" name="">
+                        </td>
+                        <td><button type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span></button></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
