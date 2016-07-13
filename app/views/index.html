@@ -18,7 +18,7 @@
                 <form action="archivos" method="post" enctype="multipart/form-data">
 
                     <input type="file" name="files" multiple="">
-                    <textarea placeholder="Tus metadatos" name='descripcion' value='{{archivo.descripcion}}'></textarea>
+                    <textarea placeholder="Tus metadatos" name='descripcion' value='{{archivo.descripcion}}' required></textarea>
                     <input type="submit" value="Enviar">
                 </form>
             </div>
@@ -42,7 +42,7 @@
                         <td>
                             <input type="checkbox" name="">
                         </td>
-                        <td><button type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span></button></td>
+                        <td><button type="button" class="btn btn-danger" ng-click="deleteTodo(x._id)"> <span class="glyphicon glyphicon-trash"></span></button></td>
                     </tr>
 
                 </tbody>
