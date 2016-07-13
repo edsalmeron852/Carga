@@ -3,49 +3,70 @@
 <div class="container">
     <h2>Administrador de archivos</h2>
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#home">Inicio</a></li>
+        <li class="active"><a data-toggle="tab" href="#home">Archivos</a></li>
         <li><a data-toggle="tab" href="#menu1">Agregar</a></li>
-        <li><a data-toggle="tab" href="#menu2">Listar</a></li>
 
     </ul>
 
     <div class="tab-content">
-        <div id="home" class="tab-pane fade in active">
-          <h3>Lista de Archivos</h3>
-          Buscar: <input ng-model="searchText">
-          <table class="table table-hover">
-              <thead>
-                  <tr>
-                      <th>Descripcion</th>
-                      <th>Tipo</th>
-                      <th>Editar </th>
-                      <th>Eliminar</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr ng-repeat="x in archivos | filter:searchText">
-                      <td>[[x.descripcion]]</td>
-                      <td>[[x.path]]</td>
-                      <td>
-                         <input type="checkbox" ng-checked="master" ng-model="isTrue" ng-change="getIndex(x._id,isTrue )" />
+        <div id="home" class="tab-pane fade in active" >
+            <div style="width:70%; float: left;">
+                <h3>Lista de Archivos</h3> Buscar:
+                <input ng-model="searchText">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Descripcion</th>
+                            <th>Tipo</th>
+                            <th>Editar </th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in archivos | filter:searchText">
+                            <td>[[x.descripcion]]</td>
+                            <td>[[x.path]]</td>
+                            <td>
+                                <input type="checkbox" ng-checked="master" ng-model="isTrue" ng-change="getIndex(x,isTrue )" />
 
-                      </td>
-                      <td><button type="button" class="btn btn-danger" ng-click="deleteTodo(x._id)"> <span class="glyphicon glyphicon-trash"></span></button></td>
-                  </tr>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger" ng-click="deleteTodo(x._id)"> <span class="glyphicon glyphicon-trash"></span></button>
+                            </td>
+                        </tr>
 
-              </tbody>
-          </table>
-        </div>
-        <div id="menu1" class="tab-pane fade">
-            <h3>Subir Archivos</h3>
-            <div class="form">
-                <form action="archivos" method="post" enctype="multipart/form-data">
-
-                    <input type="file" name="files" multiple="">
-                    <textarea placeholder="Tus metadatos" name='descripcion' value='{{archivo.descripcion}}' required></textarea>
-                    <input type="submit" value="Enviar">
-                </form>
+                    </tbody>
+                </table>
             </div>
+            <div class="col 1" style=" float: right; margin-top: 5%;">
+                <center>
+                    <h3>Metadatos</h3>
+                </center>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr ng-repeat="y in meta.comp">
+                            <td>[[y.descripcion]]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="menu1" class="tab-pane fade" style="display: inline-block; padding: 93px 0px 0px 445px;">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <h3>Subir Archivos</h3>
+                <br>
+                <div class="form">
+                    <form action="archivos" method="post" enctype="multipart/form-data">
+
+                        <input type="file" name="files" multiple="" required style="padding: 0px 0px 20px 0;">
+                        <br>
+                        <textarea placeholder="Tus metadatos" name='descripcion' value='{{archivo.descripcion}}' required></textarea>
+                        <br>
+                        <button type="submit" class="btn btn-default">Enviar</button>
+                    </form>
+                </div>
+            </div>
+
         </div>
         <div id="menu2" class="tab-pane fade">
 

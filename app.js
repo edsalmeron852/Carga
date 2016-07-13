@@ -8,7 +8,7 @@ var multer = require('multer');
 var upload = multer({
     dest: 'uploads/'
 });
-var middleware_upload = upload.array('files', 9);
+var middleware_upload = upload.array('files', 100);
 
 //Conexion mongo
 mongoose.connect('mongodb://localhost/myapp');
@@ -74,7 +74,7 @@ app.post('/archivos', middleware_upload, function(req, res) {
 
 
 ///Listar archivos
-app.get('/archivos/list', function(req, res) {
+app.get('/archivos', function(req, res) {
     Archivo.find(function(err, archivos) {
         if (err) console.log(err);
         return res.jsonp(archivos);
@@ -82,7 +82,7 @@ app.get('/archivos/list', function(req, res) {
 
 });
 ///Editar un archivo
-app.get('/archivos/edit/:id', function(req, res) {
+app.get('/archivos/:id', function(req, res) {
     var id = req.params.id;
 
     Archivo.findOne({
@@ -97,7 +97,7 @@ app.get('/archivos/edit/:id', function(req, res) {
 });
 //Actualizar Archivos
 
-app.put('/archivos/edit', function(req, res) {
+app.put('/archivos', function(req, res) {
     console.log('put');
     console.log(req.body);
     var data = {
@@ -117,7 +117,7 @@ app.put('/archivos/edit', function(req, res) {
 });
 
 //Eliminar archivos
-app.delete('/archivos/delete/:id', function(req, res) {
+app.delete('/archivos/:id', function(req, res) {
     var id = req.params.id;
     console.log('delete');
     Archivo.findOneAndRemove({
