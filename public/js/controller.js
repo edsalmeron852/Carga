@@ -47,11 +47,11 @@ $http({
 };
 
 */
-$scope.update = function(obj) {
-
+$scope.update = function(x) {
+console.log(x);
   var x={
     ids : ""+$scope.meta.ids,
-    descripcion: "--"+obj.descripcion
+    descripcion: ""+x
   }
   $http({
    method: 'PUT',
@@ -60,9 +60,14 @@ $scope.update = function(obj) {
   }).then(function successCallback(response) {
       toastr.success("Contenido Actualizado");
       $scope.refresh();
+      $scope.meta.desc =[];
    }, function errorCallback(err) {
      $scope.refresh();
    });
+
+};
+$scope.recibe = function(obj) {
+console.log(obj);
 
 };
 
@@ -84,7 +89,7 @@ $scope.meta.ids="";
 
             if (isTrue){
                 $scope.meta.desc.push(obj);
-                $scope.firstName = obj._id;
+                $scope.firstName = obj.descripcion;
             }
             else {
                 var index = $scope.meta.desc.indexOf(obj);

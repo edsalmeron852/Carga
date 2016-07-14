@@ -14,7 +14,7 @@
     		<h2>Filtrar</h2>
             <div id="custom-search-input">
                 <div class="input-group col-md-3" style="float:right">
-                    <input type="text" class="form-control input-sm" placeholder="Buscar" ng-model="searchText"/>
+                    <input type="text" class="form-control input-sm" placeholder="Buscar" ng-model="searchText.descripcion"/>
                     <span class="input-group-btn">
                         <button class="btn btn-info btn-sm" type="button">
                             <i class="glyphicon glyphicon-search"></i>
@@ -37,7 +37,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="x in archivos | filter:searchText">
+                        <tr ng-repeat="x in archivos | filter:searchText ">
                             <td>[[x.descripcion]]</td>
                             <td>[[x.path]]</td>
                             <td>
@@ -63,7 +63,7 @@
                         <tr ng-repeat="y in meta.desc">
 
                             <td><input type="text" ng-model="firstName" > </td>
-                            <td><button type="submit" class="btn" ng-click="update(y)"></button> </td>
+                            <td><button type="submit" class="btn" ng-click="update(firstName)"></button> </td>
                         </tr>
                     </tbody>
                 </table>
