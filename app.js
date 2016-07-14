@@ -104,15 +104,10 @@ app.put('/archivos', function(req, res) {
         descripcion: req.body.descripcion
     }
     var ids = req.body.ids.split(" ");
-    console.log(data);
-    Archivo.update({
-        "_id": {
-            $in: ids
-        }
-    }, data, {
-        multi: true
-    }, function(err, archivo) {
-        res.status(200).jsonp(archivo);
+
+    Archivo.update({"_id": { $in: ids }}, data, { multi: true }, function(err, archivo) {
+       //res.status(200).jsonp(archivo);
+       res.send("actualizado")
     });
 });
 /*

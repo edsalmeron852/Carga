@@ -51,16 +51,14 @@ $scope.update = function(obj) {
 
   var x={
     ids : ""+$scope.meta.ids,
-    descripcion: "aaa "+obj.descripcion
+    descripcion: "--"+obj.descripcion
   }
   $http({
    method: 'PUT',
    url: '/archivos',
    data: x
   }).then(function successCallback(response) {
-      console.log(
-
-      );
+      toastr.success("Contenido Actualizado");
       $scope.refresh();
    }, function errorCallback(err) {
      $scope.refresh();

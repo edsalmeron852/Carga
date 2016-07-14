@@ -9,10 +9,24 @@
     </ul>
 
     <div class="tab-content">
+      <div class="row">
+        <div class="col-md-12 text-right">
+    		<h2>Filtrar</h2>
+            <div id="custom-search-input">
+                <div class="input-group col-md-3" style="float:right">
+                    <input type="text" class="form-control input-sm" placeholder="Buscar" ng-model="searchText"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-sm" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+	</div>
         <div id="home" class="tab-pane fade in active" >
             <div style="width:70%; float: left;">
-                <h3>Lista de Archivos</h3> Buscar:
-                <input ng-model="searchText">
+                <h3>Lista de Archivos</h3>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -31,7 +45,7 @@
                             </td>
                             <td>
                                 <!--button type="button" class="btn btn-danger" ng-click="deleteTodo(x._id)"> <span class="glyphicon glyphicon-trash"></span></button-->
-                                <button type="button" class="btn btn-danger btn-primary btn-lg" data-toggle="modal" data-target="#myModal" ng-click="setDelete(x)">
+                                <button type="button" class="btn btn-danger btn-primary btn-sm" data-toggle="modal" data-target="#myModal" ng-click="setDelete(x)">
                                    <span class="glyphicon glyphicon-trash"> </span></button>
                             </td>
                         </tr>
@@ -77,12 +91,12 @@
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
              <div class="modal-dialog modal-sm">
                <div class="modal-content">
-                   <div class="modal-header">
+                   <div class="modal-header  bg-primary text-center text-capitalize">
                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                       <h4 class="modal-title" id="myModalLabel">Eliminar Archivo: [[toDelete.descripcion]]</h4>
+                       <h4 class="modal-title" id="myModalLabel"> <strong> confirmar </strong></h4>
                    </div>
                    <div class="modal-body">
-
+                        Eliminar Archivo: [[toDelete.mimetype]]
                    </div>
                    <div class="modal-footer">
                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
