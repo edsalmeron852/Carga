@@ -31,22 +31,41 @@ $http.delete('/archivos/' + id._id)
           });
 };
 
-//update
+/*
+$scope.editLesson = function(lesson){
+console.log("Editando clase", lesson);
+$http({
+ method: 'PUT',
+ url: '/lessons/'+lesson._id,
+ data: lesson
+}).then(function successCallback(response) {
 
 
-///)
+ }, function errorCallback(response) {
+
+ });
+};
+
+*/
 $scope.update = function(obj) {
-console.log("aqui" + $scope.firstName);
 
-$http.put('/archivos/' + obj._id,obj)
-    .success(function(data) {
+  var x={
+    ids : ""+$scope.meta.ids,
+    descripcion: "aaa "+obj.descripcion
+  }
+  $http({
+   method: 'PUT',
+   url: '/archivos',
+   data: x
+  }).then(function successCallback(response) {
+      console.log(
 
-        $scope.refresh();
-          console.log(data)
-          })
-  .error(function(data) {
-        console.log('Error: ' + data);
-          });
+      );
+      $scope.refresh();
+   }, function errorCallback(err) {
+     $scope.refresh();
+   });
+
 };
 
 //refresh $scope.archivos[data];
@@ -63,7 +82,7 @@ $scope.meta={};
 $scope.meta.desc=[];
 $scope.meta.comp=[];
 $scope.getIndex = function (obj, isTrue) {
-
+$scope.meta.ids="";
 
             if (isTrue){
                 $scope.meta.desc.push(obj);
@@ -73,9 +92,12 @@ $scope.getIndex = function (obj, isTrue) {
                 var index = $scope.meta.desc.indexOf(obj);
                 $scope.meta.desc.splice(index, 1);
 
-            }
-
-
+            };
+            for(var i=0; i<$scope.meta.desc.length; i++){
+                $scope.meta.ids=$scope.meta.ids+""+$scope.meta.desc[i]._id+" "
+            };
+            $scope.meta.ids=$scope.meta.ids.substring(0,$scope.meta.ids.length-1)
+            console.log($scope.meta.ids);
             };
 
 
