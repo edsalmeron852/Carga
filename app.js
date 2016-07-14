@@ -96,7 +96,7 @@ app.get('/archivos/:id', function(req, res) {
 
 });
 //Actualizar Archivos
-
+/*
 app.put('/archivos', function(req, res) {
     console.log('put');
     console.log(req.body);
@@ -115,7 +115,17 @@ app.put('/archivos', function(req, res) {
         res.status(200).jsonp(archivo);
     });
 });
+*/
+app.put('/archivos/:id', function (req, res) {
 
+var data = {
+  descripcion: req.body._id
+};
+console.log(req.body);
+Archivo.update({"_id": req.params.id}, data, function (err, archivo) {
+    res.status(200).jsonp(archivo);
+});
+});
 //Eliminar archivos
 app.delete('/archivos/:id', function(req, res) {
     var id = req.params.id;
