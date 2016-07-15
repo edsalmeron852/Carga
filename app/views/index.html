@@ -1,64 +1,32 @@
 {% extends 'layout.html' %} {% block head %} {% parent %} {% endblock %} {% block content %}
-
-
-
-
 <div class="container">
     <h2>Administrador de archivos</h2>
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#home">Archivos</a></li>
         <li><a data-toggle="tab" href="#menu1">Agregar</a></li>
-
     </ul>
 
     <div class="tab-content">
-      <div class="row">
-        <div class="col-md-12 text-right">
-    		<h2>Filtrar</h2>
-            <div id="custom-search-input">
-                <div class="input-group col-md-3" style="float:right">
-                    <input type="text" class="form-control input-sm" placeholder="Buscar" ng-model="searchText.descripcion"/>
-                    <span class="input-group-btn">
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <h2>Filtrar</h2>
+                <div id="custom-search-input">
+                    <div class="input-group col-md-3" style="float:right">
+                        <input type="text" class="form-control input-sm" placeholder="Buscar" ng-model="searchText.descripcion" />
+                        <span class="input-group-btn">
                         <button class="btn btn-info btn-sm" type="button">
                             <i class="glyphicon glyphicon-search"></i>
                         </button>
                     </span>
+                    </div>
                 </div>
             </div>
         </div>
-	</div>
-        <div id="home" class="tab-pane fade in active" >
+        <div id="home" class="tab-pane fade in active">
             <div style="width:70%; float: left;">
                 <h3>Lista de Archivos</h3>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th><input type="checkbox" ng-model="master" ng-change="isSelectAll()"></th>
-
-                        </tr>
-                        <tr>
-                            <th>Descripcion</th>
-                            <th>Tipo</th>
-                            <th>Editar </th>
-                            <th>Eliminar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="x in archivos | filter:searchText ">
-                            <td>[[x.descripcion]]</td>
-                            <td>[[x.path]]</td>
-                            <td>
-                                <input type="checkbox" ng-checked="master" name="check[]" ng-model="isTrue" ng-change="getIndex(x,isTrue )" />
-                            </td>
-                            <td>
-                                <!--button type="button" class="btn btn-danger" ng-click="deleteTodo(x._id)"> <span class="glyphicon glyphicon-trash"></span></button-->
-                                <button type="button" class="btn btn-danger btn-primary btn-sm" data-toggle="modal" data-target="#myModal" ng-click="setDelete(x)">
-                                   <span class="glyphicon glyphicon-trash"> </span></button>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
+                <!--Lista de archivos -->
+                {% include "./archivos.html" %}
             </div>
             <div class="col 1" style=" float: right; margin-top: 5%;">
                 <center>
@@ -69,49 +37,23 @@
                     <tbody>
                         <tr ng-repeat="y in meta.desc">
 
-                            <td><input type="text" ng-model="firstName"> </td>
-                            <td><button type="submit" class="btn" ng-click="update(firstName)"></button> </td>
+                            <td>
+                                <input type="text" ng-model="firstName"> </td>
+                            <td>
+                                <button type="submit" class="btn" ng-click="update(firstName)"></button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
         <div id="menu1" class="tab-pane fade" style="display: inline-block; padding: 93px 0px 0px 445px;">
-            <div class="col-sm-8 col-sm-offset-2 text-center">
-                <h3>Subir Archivos</h3>
-                <br>
-                <div class="form">
-                    <form action="archivos" method="post" enctype="multipart/form-data">
-
-                        <input type="file" name="files" multiple="" required style="padding: 0px 0px 20px 0;">
-                        <br>
-                        <textarea placeholder="Tus metadatos" name='descripcion' value='{{archivo.descripcion}}' required></textarea>
-                        <br>
-                        <button type="submit" class="btn btn-default">Enviar</button>
-                    </form>
-                </div>
-            </div>
+            <!--Subir N archivos -->
+            {% include "./subirN.html" %}
 
         </div>
-
-
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-             <div class="modal-dialog modal-sm">
-               <div class="modal-content">
-                   <div class="modal-header  bg-primary text-center text-capitalize">
-                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                       <h4 class="modal-title" id="myModalLabel"> <strong> confirmar </strong></h4>
-                   </div>
-                   <div class="modal-body">
-                        Eliminar Archivo: [[toDelete.mimetype]]
-                   </div>
-                   <div class="modal-footer">
-                       <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                       <button type="button" class="btn btn-primary" ng-click="deleteTodo(toDelete)" data-dismiss="modal" >Eliminar</button>
-                   </div>
-               </div>
-             </div>
-         </div>
+        <!-- modal eliminar! -->
+        {% include "./eliminar.html" %}
 
     </div>
 </div>

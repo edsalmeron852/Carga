@@ -1,22 +1,13 @@
 <!doctype html>
 <html ng-app='appPrueba'>
-
 <head>
     <meta charset="utf-8">
     <title>{% block title %}INE{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    {% include "./header.html" %}
-
-    {% block head %} {% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1"> {% include "./header.html" %} {% block head %} {% endblock %}
 </head>
-
 <body ng-controller="padreCtrl">
-
-
 
     {% block content %} {% endblock %}
 
 </body>
-
 </html>
