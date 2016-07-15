@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Filtrar</h2>
+        <div id="custom-search-input">
+            <div class="input-group col-md-3 ">
+                <input type="text" class="form-control input-sm" placeholder="Buscar descripción" ng-model="searchText.descripcion" />
+                <span class="input-group-btn">
+                <button class="btn btn-info btn-sm" type="button">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+  <div class="col-lg-8">
+    <table class="table table-hover ">
+        <thead>
+            <tr>
+                <th>Descripcion</th>
+                <th>Tipo</th>
+                <th>Editar </th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in archivos | filter:searchText ">
+                <td>[[x.descripcion]]</td>
+                <td>[[x.path]]</td>
+                <td>
+                    <input type="checkbox" ng-checked="master" name="check[]" ng-model="isTrue" ng-change="getIndex(x,isTrue )" />
+                </td>
+                <td>
+                    <!--button type="button" class="btn btn-danger" ng-click="deleteTodo(x._id)"> <span class="glyphicon glyphicon-trash"></span></button-->
+                    <button type="button" class="btn btn-danger btn-primary btn-sm" data-toggle="modal" data-target="#myModal" ng-click="setDelete(x)">
+                        <span class="glyphicon glyphicon-trash"> </span></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+  <div class="col-lg-4 text-right relleno-top">
+    <p>
+      <textarea type="text" rows="12" class="form-control input-sm" ng-model="firstName" placeholder="Metadatos ..."> </textarea>
+    </p>
+    <button type="submit" class="btn btn-info btn-sm " ng-click="update(firstName)">Actualizar</button>
+  </div>
+</div>

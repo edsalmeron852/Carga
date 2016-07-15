@@ -1,0 +1,17 @@
+<div class=" col-lg-4 col-lg-offset-4">
+    <h3>Subir Archivos</h3>
+    <br>
+    <div class="form">
+        <form action="archivos" method="post" enctype="multipart/form-data">
+
+            <input type="file" name="files" multiple="" required>
+            <br>
+            <textarea rows="12" class="form-control input-sm" placeholder="Tus metadatos" name='descripcion' value='{{archivo.descripcion}}' required></textarea>
+            <br>
+            <button type="submit" class="btn btn-info btn-sm " >Enviar</button>
+        </form>
+    </div>
+</div>
+<div class="col-lg-4">
+
+</div>

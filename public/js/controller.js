@@ -93,6 +93,7 @@ $scope.meta.ids="";
                 $scope.meta.desc.splice(index, 1);
 
             };
+            
             for(var i=0; i<$scope.meta.desc.length; i++){
                 $scope.meta.ids=$scope.meta.ids+""+$scope.meta.desc[i]._id+" "
             };

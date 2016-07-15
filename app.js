@@ -147,5 +147,5 @@ swig.setDefaults({
 });
 
 app.use(express.static('./public'));
-app.listen(8888);
-console.log('Servidor escuchando en puerto 8888!!!');
+app.listen(3000);
+console.log('Servidor escuchando en puerto 3000!!!');
