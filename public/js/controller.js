@@ -9,11 +9,12 @@ $http.get("/archivos")
 .success(function (data) {
 console.log(data);
 $scope.archivos = data;
+toastr.success("Bienvenido");
 })
 .error(function (err) {
 
 });
-// delete a todo after checking it
+// set obj to delete
 $scope.setDelete=function(obj){
   $scope.toDelete=obj
   console.log($scope.toDelete);
@@ -24,6 +25,7 @@ $scope.deleteTodo = function(id) {
 $http.delete('/archivos/' + id._id)
     .success(function(data) {
         $scope.refresh();
+        toastr.success("Contenido Eliminado");
           console.log(data)
           })
   .error(function(data) {
@@ -66,10 +68,6 @@ console.log(x);
    });
 
 };
-$scope.recibe = function(obj) {
-console.log(obj);
-
-};
 
 //refresh $scope.archivos[data];
 
@@ -83,7 +81,6 @@ $scope.refresh = function(){
 //Array of Idś
 $scope.meta={};
 $scope.meta.desc=[];
-$scope.meta.comp=[];
 $scope.getIndex = function (obj, isTrue) {
 $scope.meta.ids="";
 

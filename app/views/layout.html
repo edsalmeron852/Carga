@@ -17,12 +17,19 @@
                 $interpolateProvider.endSymbol(']]');
             });
     </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+    $("#selecctall").change(function(){
+      $(".checkbox1").prop('checked', $(this).prop("checked"));
+      });
+});
+    </script>
     <script src="js/controller.js"></script>
     <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
     <script href="lib/bootstrap/dist/js/bootstrap.js"/> </script>
     <link href="lib/toastr/toastr.css" rel="stylesheet"/>
     <script src="lib/toastr/toastr.js"></script>
-  
+
     {% block head %} {% endblock %}
 </head>
 
