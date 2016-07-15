@@ -8,7 +8,7 @@ var multer = require('multer');
 var upload = multer({
     dest: 'uploads/'
 });
-var middleware_upload = upload.array('files', 100);
+var middleware_upload = upload.array('input-file-preview', 100);
 
 //Conexion mongo
 mongoose.connect('mongodb://localhost/myapp');
