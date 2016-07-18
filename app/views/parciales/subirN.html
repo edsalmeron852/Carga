@@ -1,16 +1,14 @@
 <div class=" col-lg-4 col-lg-offset-4 text-right">
-    <h3>Subir Archivos</h3>
+    <h3 class="text-right">Subir Archivos</h3>
     <br>
     <script src="js/file.js"></script>
     <div class="form">
         <form action="archivos" method="post" enctype="multipart/form-data">
 
 
-            <textarea rows="12" class="form-control input-sm" placeholder="Tus metadatos" name='descripcion' value='{{archivo.descripcion}}' required></textarea>
-            <!--  -->
-            <div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <textarea rows="12" class="form-control input-sm " placeholder="Tus metadatos ..." name='descripcion' value='{{archivo.descripcion}}'></textarea>
                       <!-- image-preview-filename input [CUT FROM HERE]-->
-                      <div class="input-group image-preview">
+                      <div class="input-group image-preview relleno-top">
                           <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
                           <span class="input-group-btn">
                               <!-- image-preview-clear button -->
@@ -20,13 +18,11 @@
                               <!-- image-preview-input -->
                               <div class="btn btn-default image-preview-input">
                                   <span class="glyphicon glyphicon-folder-open"></span>
-                                  <span class="image-preview-input-title">Browse</span>
+                                  <span class="image-preview-input-title">Archivos</span>
                                   <input type="file" multiple name="input-file-preview" /> <!-- rename it -->
                               </div>
                           </span>
                       </div><!-- /input-group image-preview [TO HERE]-->
-                  </div>
-            <!--  -->
               <br/>
             <button type="submit" class="btn btn-info btn-sm " >Enviar</button>
         </form>
