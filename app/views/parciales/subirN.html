@@ -2,11 +2,12 @@
     <h3 class="text-right">Subir Archivos</h3>
     <br>
     <script src="js/file.js"></script>
-    <div class="form">
-        <form action="archivos" method="post" enctype="multipart/form-data">
-
-
-            <textarea rows="12" class="form-control input-sm " placeholder="Tus metadatos ..." name='descripcion' value='{{archivo.descripcion}}'></textarea>
+    <div class="form " >
+        <form name="subirN" action="archivos" method="post" enctype="multipart/form-data"  >
+          <div ng-class="{'has-error':subirN.descripcion.$error.required && subirN.descripcion.$touched}">
+            <textarea rows="12" class="form-control input-sm " placeholder="Tus metadatos ..." ng-model="descripcion" name='descripcion' value='{{archivo.descripcion}}' required></textarea>
+            <p ng-if="subirN.descripcion.$error.required && subirN.descripcion.$touched" class="help-block">*Los metadatos son requeridos</p>
+          </div>
                       <!-- image-preview-filename input [CUT FROM HERE]-->
                       <div class="input-group image-preview relleno-top">
                           <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
@@ -18,13 +19,13 @@
                               <!-- image-preview-input -->
                               <div class="btn btn-default image-preview-input">
                                   <span class="glyphicon glyphicon-folder-open"></span>
-                                  <span class="image-preview-input-title">Archivos</span>
-                                  <input type="file" multiple name="input-file-preview" /> <!-- rename it -->
+                                  <span class="image-preview-input-title" >Archivos</span>
+                                  <input type="file" multiple name="files" /> <!-- rename it -->
                               </div>
                           </span>
                       </div><!-- /input-group image-preview [TO HERE]-->
               <br/>
-            <button type="submit" class="btn btn-info btn-sm " >Enviar</button>
+            <button type="submit" ng-disabled="subirN.$invalid" class="btn btn-info btn-sm " >Enviar</button>
         </form>
     </div>
 </div>

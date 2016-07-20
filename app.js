@@ -8,7 +8,7 @@ var multer = require('multer');
 var upload = multer({
     dest: 'uploads/'
 });
-var middleware_upload = upload.array('input-file-preview', 100);
+var middleware_upload = upload.array('files', 100);
 
 //Conexion mongo
 mongoose.connect('mongodb://localhost/myapp');
@@ -147,5 +147,5 @@ swig.setDefaults({
 });
 
 app.use(express.static('./public'));
-app.listen(3002);
-console.log('Servidor escuchando en puerto 3000!!!');
+app.listen(8000);
+console.log('Servidor escuchando en puerto 8000!!!');

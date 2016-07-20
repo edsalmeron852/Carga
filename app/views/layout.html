@@ -5,7 +5,7 @@
     <title>{% block title %}INE{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"> {% include "./header.html" %} {% block head %} {% endblock %}
 </head>
-<body ng-controller="padreCtrl">
+<body ng-controller="padreCtrl"  ng-init="getArchivos()">
 
     {% block content %} {% endblock %}
 
