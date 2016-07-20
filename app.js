@@ -5,10 +5,33 @@ var async = require("async");
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var multer = require('multer');
+var cloudinary = require('cloudinary');
+
+
+cloudinary.config({
+  cloud_name: "lalo-s" ,
+  api_key: "972562558254943" ,
+  api_secret:"mtQ8_Ida_SdQWaEe7I7H5VO92j0"
+});
+/*
 var upload = multer({
     dest: 'uploads/'
 });
 var middleware_upload = upload.array('files', 100);
+*/
+
+var storage	=	multer.diskStorage({
+ destination: function (req, file, callback) {
+   callback(null, './uploads');
+ },
+ filename: function (req, file, callback) {
+   callback(null, file.fieldname + '-' + Date.now());
+ }
+});
+
+var middleware_upload = multer({ storage : storage }).array('files',99);
+
+
 
 //Conexion mongo
 mongoose.connect('mongodb://localhost/myapp');
@@ -16,6 +39,7 @@ mongoose.connect('mongodb://localhost/myapp');
 var archivoSchema = {
         path: String,
         mimetype: String,
+        originalname: String,
         descripcion: String
     }
     //Modelo Archivo
@@ -40,9 +64,7 @@ app.use(methodOverride(function(req, res) {
     }))
     //Ruta inicio
 app.get('/', function(req, res) {
-    res.render('index', {
-        a: 'sss'
-    });
+    res.render('index');
 });
 //////////////////
 
@@ -51,18 +73,26 @@ app.get('/', function(req, res) {
 app.post('/archivos', middleware_upload, function(req, res) {
     async.each(req.files, function(file, callback) {
   // async.forEachOf(req.files, function(value, key, callback) {
-        var data = {
-            path: file.path,
-            mimetype: file.mimetype,
-            descripcion: req.body.descripcion
-        }
+console.log(req.files);
+cloudinary.uploader.upload(file.path, function(result) {
+  console.log(result)
 
-        var archivo = new Archivo(data);
-        archivo.save(function(err) {
-            if (err) return callback(err);
-            callback(null);
+  var data = {
+      path: result.url,
+      mimetype: file.mimetype,
+      originalname: file.originalname,
+      descripcion: req.body.descripcion
+  }
 
-        });
+  var archivo = new Archivo(data);
+  archivo.save(function(err) {
+      if (err) return callback(err);
+      callback(null);
+
+  });
+
+});
+
 
     }, function(err) {
         if (err) console.error(err.message);
