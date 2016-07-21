@@ -6,20 +6,27 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var multer = require('multer');
 var cloudinary = require('cloudinary');
+var config = require('./config');
+var gcloud = require('gcloud');
+var colors = require('colors');
+
+//Petición de Credenciales a config.js
+var storage = gcloud.storage({
+        projectId: config.projectId,
+        keyFilename: config.keyFilename
+    });
+
+var bucket = storage.bucket(config.bucketName);
 
 
+//Credenciales de Cloudinary, para subir
 cloudinary.config({
   cloud_name: "lalo-s" ,
   api_key: "972562558254943" ,
   api_secret:"mtQ8_Ida_SdQWaEe7I7H5VO92j0"
 });
-/*
-var upload = multer({
-    dest: 'uploads/'
-});
-var middleware_upload = upload.array('files', 100);
-*/
 
+//Multer tratamiento de archivos
 var storage	=	multer.diskStorage({
  destination: function (req, file, callback) {
    callback(null, './uploads');
@@ -38,6 +45,9 @@ mongoose.connect('mongodb://localhost/myapp');
 //Esquema del modelo
 var archivoSchema = {
         path: String,
+        autor: String,
+        subtema: String,
+        fecha: { type: Date, default: Date.now },
         mimetype: String,
         originalname: String,
         descripcion: String
@@ -69,7 +79,7 @@ app.get('/', function(req, res) {
 //////////////////
 
 //Crear Archivos
-
+/*
 app.post('/archivos', middleware_upload, function(req, res) {
     async.each(req.files, function(file, callback) {
   // async.forEachOf(req.files, function(value, key, callback) {
@@ -102,6 +112,40 @@ cloudinary.uploader.upload(file.path, function(result) {
 
 });
 
+*/
+
+app.post('/archivos', middleware_upload, function(req, res) {
+    async.each(req.files, function(file, callback) {
+
+bucket.upload(file.path, function(err, files) {
+
+  var data = {
+      path: "https://"+ config.bucketName + ".storage.googleapis.com/"+files.name,
+      mimetype: file.mimetype,
+      originalname: file.originalname,
+      autor: req.body.autor,
+      subtema: req.body.subtema,
+      fecha: req.body.fecha,
+      descripcion: req.body.descripcion
+  }
+
+  var archivo = new Archivo(data);
+  archivo.save(function(err) {
+      if (err) return callback(err);
+      callback(null);
+
+  });
+
+});
+
+
+    }, function(err) {
+        if (err) console.error(err.message);
+        // configs is now a map of JSON data
+        res.redirect('/')
+    })
+
+});
 
 ///Listar archivos
 app.get('/archivos', function(req, res) {
