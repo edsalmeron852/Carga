@@ -9,7 +9,7 @@ var cloudinary = require('cloudinary');
 var config = require('./config');
 var gcloud = require('gcloud');
 var colors = require('colors');
-
+/*
 //Petición de Credenciales a config.js
 var storage = gcloud.storage({
         projectId: config.projectId,
@@ -18,7 +18,7 @@ var storage = gcloud.storage({
 
 var bucket = storage.bucket(config.bucketName);
 
-
+*/
 //Credenciales de Cloudinary, para subir
 cloudinary.config({
   cloud_name: "lalo-s" ,
@@ -79,19 +79,22 @@ app.get('/', function(req, res) {
 //////////////////
 
 //Crear Archivos
-/*
+
 app.post('/archivos', middleware_upload, function(req, res) {
     async.each(req.files, function(file, callback) {
   // async.forEachOf(req.files, function(value, key, callback) {
 console.log(req.files);
 cloudinary.uploader.upload(file.path, function(result) {
-  console.log(result)
+  console.log(req.body)
 
   var data = {
       path: result.url,
       mimetype: file.mimetype,
       originalname: file.originalname,
-      descripcion: req.body.descripcion
+      descripcion: req.body.descripcion,
+      autor: req.body.autor,
+      subtema: req.body.subtema
+
   }
 
   var archivo = new Archivo(data);
@@ -112,8 +115,8 @@ cloudinary.uploader.upload(file.path, function(result) {
 
 });
 
-*/
 
+/*
 app.post('/archivos', middleware_upload, function(req, res) {
     async.each(req.files, function(file, callback) {
 
@@ -146,7 +149,7 @@ bucket.upload(file.path, function(err, files) {
     })
 
 });
-
+*/
 ///Listar archivos
 app.get('/archivos', function(req, res) {
     Archivo.find(function(err, archivos) {

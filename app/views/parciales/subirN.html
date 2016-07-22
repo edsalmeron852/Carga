@@ -6,6 +6,8 @@
         <form name="subirN" action="archivos" method="post" enctype="multipart/form-data"  >
           <div ng-class="{'has-error':subirN.descripcion.$error.required && subirN.descripcion.$touched}">
             <textarea rows="12" class="form-control input-sm " placeholder="Tus metadatos ..." ng-model="descripcion" name='descripcion' value='{{archivo.descripcion}}' required></textarea>
+            <input type="text" placeholder="Tus metadatos2 ..." ng-model="subtema" name='subtema'>
+            <textarea rows="1" class="form-control input-sm " placeholder="Tus metadatos2 ..." ng-model="autor" name='autor' required></textarea>
             <p ng-if="subirN.descripcion.$error.required && subirN.descripcion.$touched" class="help-block">*Los metadatos son requeridos</p>
           </div>
                       <!-- image-preview-filename input [CUT FROM HERE]-->
