@@ -9,8 +9,7 @@ var cloudinary = require('cloudinary');
 var config = require('./config');
 var gcloud = require('gcloud');
 var colors = require('colors');
-/*
-//Petición de Credenciales a config.js
+///Petición de Credenciales a config.js
 var storage = gcloud.storage({
         projectId: config.projectId,
         keyFilename: config.keyFilename
@@ -18,7 +17,7 @@ var storage = gcloud.storage({
 
 var bucket = storage.bucket(config.bucketName);
 
-*/
+
 //Credenciales de Cloudinary, para subir
 cloudinary.config({
   cloud_name: "lalo-s" ,
@@ -41,11 +40,13 @@ var middleware_upload = multer({ storage : storage }).array('files',99);
 
 
 //Conexion mongo
-mongoose.connect('mongodb://localhost/myapp');
+mongoose.connect('mongodb://localhost:27017/myapp');
 //Esquema del modelo
 var archivoSchema = {
         path: String,
         autor: String,
+        sesion: String,
+        titulo: String,
         subtema: String,
         fecha: { type: Date, default: Date.now },
         mimetype: String,
@@ -79,7 +80,7 @@ app.get('/', function(req, res) {
 //////////////////
 
 //Crear Archivos
-
+/*
 app.post('/archivos', middleware_upload, function(req, res) {
     async.each(req.files, function(file, callback) {
   // async.forEachOf(req.files, function(value, key, callback) {
@@ -115,8 +116,8 @@ cloudinary.uploader.upload(file.path, function(result) {
 
 });
 
+*/
 
-/*
 app.post('/archivos', middleware_upload, function(req, res) {
     async.each(req.files, function(file, callback) {
 
@@ -127,10 +128,13 @@ bucket.upload(file.path, function(err, files) {
       mimetype: file.mimetype,
       originalname: file.originalname,
       autor: req.body.autor,
+      sesion: req.body.sesion,
+      titulo: req.body.titulo,
       subtema: req.body.subtema,
       fecha: req.body.fecha,
       descripcion: req.body.descripcion
   }
+
 
   var archivo = new Archivo(data);
   archivo.save(function(err) {
@@ -149,7 +153,7 @@ bucket.upload(file.path, function(err, files) {
     })
 
 });
-*/
+
 ///Listar archivos
 app.get('/archivos', function(req, res) {
     Archivo.find(function(err, archivos) {

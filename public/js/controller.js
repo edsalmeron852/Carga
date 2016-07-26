@@ -3,6 +3,13 @@ angular.module('appPrueba')
 
             $scope.archivos = [];
             $scope.firstName = "";
+            $scope.editFiles = [];
+            $scope.master = [];
+            $scope.finalArray = [];
+            $scope.dataFiles = [];
+            $scope.editFinalArray = [];
+            $scope.exists_equals_data = false;
+
 
             $scope.getArchivos = function() {
             $http.get("/archivos")
@@ -47,28 +54,148 @@ angular.module('appPrueba')
         };
 
         */
-        $scope.update = function(obj) {
-            for (var j = 0; j < $scope.meta.desc.length; j++) {
-                var x = {
-                    ids: "" + $scope.meta.desc[j]._id,
-                    descripcion: "" + $scope.meta.desc[j].path
-                };
-                console.log(x);
-                $http({
-                    method: 'PUT',
-                    url: '/archivos',
-                    data: x
-                }).then(function successCallback(response) {
+        $scope.update = function() {
+          $scope.dataFiles = [];
 
-                },function errorCallback(response) {
+          for (var i = 0; i < $scope.editFiles.length; i++) {
+              var file = $scope.editFiles[i];
+              var d = file.descripcion.split(",");
+              for (var j = 0; j < $scope.editFinalArray.length; j++) {
+                  var final_data = $scope.editFinalArray[j];
+                  $scope.modify_array_data(d, final_data.data, final_data.new_data);
+              }
 
-                });
-            }
-            $scope.getArchivos();
-            $scope.meta.desc = [];
-            $scope.firstName = "";
+              $scope.dataFiles.push({
+                  _id: file._id,
+                  desc: "" + d
+              });
+          };
 
-        };
+          console.log($scope.dataFiles);
+
+          for (var r = 0; r < $scope.dataFiles.length; r++) {
+              var x = {
+                  ids: "" + $scope.dataFiles[r]._id,
+                  descripcion: "" + $scope.dataFiles[r].desc
+              }
+              $http({
+                  method: 'PUT',
+                  url: '/archivos',
+                  data: x
+              }).then(function successCallback(response) {
+                  toastr.success("Contenido Actualizado");
+                  $scope.meta.desc = [];
+              }, function errorCallback(err) {
+                $scope.getArchivos();
+              });
+          };
+          console.log(x);
+          $scope.getArchivos();
+
+      };
+
+      $scope.mergeArrays = function(file) {
+          $scope.editFinalArray = [];
+
+          if ([$scope.master[file._id]] == "true") {
+              $scope.editFiles.push(JSON.parse(JSON.stringify(file)));
+          } else {
+              $scope.removeFromArray($scope.editFiles, file);
+          }
+
+          if ($scope.editFiles.length > 0) {
+              $scope.finalArray = $scope.editFiles[0].descripcion.split(",");
+
+              for (var i = 1; i < $scope.editFiles.length; i++) {
+                  file = $scope.editFiles[i].descripcion.split(",");
+                  $scope.finalArray = $scope.merge($scope.finalArray, file);
+              }
+          } else {
+              $scope.finalArray = [];
+          }
+
+          $scope.finalArray = $scope.arrayUnique($scope.finalArray);
+
+          for (var i = 0; i < $scope.finalArray.length; i++) {
+              $scope.editFinalArray.push({
+                  data: $scope.finalArray[i],
+                  new_data: $scope.finalArray[i]
+              });
+          }
+
+          if ($scope.finalArray.length <= 0) {
+              $scope.exists_equals_data = false;
+          } else {
+              $scope.exists_equals_data = true;
+          }
+          //console.log($scope.finalArray); //arreglo que contiene la comparacion final
+      };
+
+
+      $scope.meta = {};
+      $scope.meta.desc = [];
+      $scope.meta.final = [];
+
+      $scope.getIndex = function(obj, isTrue) {
+
+          $scope.meta.ids = "";
+
+          if (isTrue) {
+              $scope.meta.desc.push(obj);
+              $scope.firstName = obj.descripcion;
+          } else {
+              var index = $scope.meta.desc.indexOf(obj);
+              $scope.meta.desc.splice(index, 1);
+          };
+
+          for (var i = 0; i < $scope.meta.desc.length; i++) {
+              var xxx = $scope.meta.desc[i].descripcion.split(",");
+              $scope.meta.ids = $scope.meta.ids + "" + $scope.meta.desc[i]._id + " "
+          };
+
+          $scope.meta.ids = $scope.meta.ids.substring(0, $scope.meta.ids.length - 1)
+
+      };
+
+      $scope.arrayUnique = function(array) {
+          var a = array.concat();
+          for (var i = 0; i < a.length; ++i) {
+              for (var j = i + 1; j < a.length; ++j) {
+                  if (a[i] === a[j])
+                      a.splice(j--, 1);
+              }
+          }
+
+          return a;
+      };
+
+      $scope.merge = function(parent, child, i) {
+          var a = [];
+          for (var i = 0; i < child.length; ++i) {
+              if (parent.indexOf(child[i]) >= 0)
+                  a.push(child[i]);
+          }
+
+          return a;
+      };
+
+      $scope.removeFromArray = function(arr, data) {
+          for (i = 0; i < arr.length; i++) {
+              if (arr[i]._id == data._id) {
+                  arr.splice(i, 1);
+              }
+          }
+      };
+
+      $scope.modify_array_data = function(parent, data, new_data) {
+          for (i = 0; i < parent.length; i++) {
+              if (parent[i] == data) {
+                  parent[i] = new_data;
+              }
+          }
+
+          return parent;
+      };
 
         //refresh $scope.archivos[data];
 
@@ -78,6 +205,29 @@ angular.module('appPrueba')
                       $scope.archivos = data;
                   });
           };*/
+
+
+          //Mostrar menus
+
+          $scope.MostrarOcultarController = function ($scope) {
+            $scope.menuState = {}
+            $scope.menuState.show = false;
+
+            $scope.cambiarMenu = function() {
+              $scope.menuState.show = !$scope.menuState.show;
+            };
+          }
+
+
+          $scope.MostrarOcultarController2 = function ($scope) {
+
+            $scope.menuState = {}
+            $scope.menuState.show = false;
+
+            $scope.cambiarMenu = function() {
+              $scope.menuState.show = !$scope.menuState.show;
+            };
+          }
 
         //Array of Idś
         $scope.meta = {};
@@ -101,6 +251,5 @@ console.log(obj);
             $scope.meta.ids = $scope.meta.ids.substring(0, $scope.meta.ids.length - 1);
                 //console.log($scope.meta.ids);
         };
-
 
     }]);

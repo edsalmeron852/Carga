@@ -1,11 +1,12 @@
 <div class="row">
-    <div class="col-lg-12">
-        <h2>Filtrar</h2>
+    <div class="col-lg-8">
+        <!--<h2>Filtrar</h2>-->
+        <br>
         <div id="custom-search-input">
-            <div class="input-group col-md-3 ">
+            <div class="input-group col-md-4">
                 <input type="text" class="form-control input-sm" placeholder="Buscar descripción" ng-model="searchText.descripcion" />
                 <span class="input-group-btn">
-                <button class="btn btn-info btn-sm" type="button">
+                <button class="btn btn-infoi btn-sm" type="button">
                     <i class="glyphicon glyphicon-search"></i>
                 </button>
             </span>
@@ -14,7 +15,7 @@
     </div>
 </div>
 <div class="row">
-  <div class="col-lg-9">
+  <div class="col-lg-8">
     <table class="table table-hover">
         <thead>
             <tr>
@@ -26,24 +27,30 @@
         </thead>
         <tbody>
             <tr ng-repeat="x in archivos | filter:searchText ">
-                <td>[[x.originalname]]</td>
+                <td><a ng-href="[[x.path]]">[[x.originalname]]</a></td>
                 <td>[[x.descripcion]]</td>
                 <td>
-                    <input type="checkbox" ng-checked="master" name="check[]" ng-model="isTrue" ng-change="getIndex(x,isTrue )" />
-                </td>
+                <input type="checkbox" ng-model='master[ [[x._id]] ]' ng-change="mergeArrays(x)" ng-checked="0" />                </td>
                 <td>
                     <!--button type="button" class="btn btn-danger" ng-click="deleteTodo(x._id)"> <span class="glyphicon glyphicon-trash"></span></button-->
-                    <button type="button" class="btn btn-danger btn-primary btn-sm" data-toggle="modal" data-target="#myModal" ng-click="setDelete(x)">
+                    <button type="button" class="btn btn-dangeri btn-primary btn-sm" data-toggle="modal" data-target="#myModal" ng-click="setDelete(x)">
                         <span class="glyphicon glyphicon-trash"> </span></button>
                 </td>
             </tr>
         </tbody>
     </table>
   </div>
-  <div class="col-lg-3 text-right relleno-top">
-    <p>
-      <textarea type="text" rows="12" class="form-control input-sm" ng-model="firstName" placeholder="Metadatos ..."> </textarea>
-    </p>
-    <button type="submit" class="btn btn-info btn-sm " ng-click="update(firstName)">Actualizar</button>
+  <div class="col-lg-4 text-right relleno-top-meta div-meta" ng-show="exists_equals_data">
+          <H5 align="left"><strong>Metadatos</strong></H5>
+          <div id="metadatos" class="meta">
+
+                  <div ng-repeat="data in finalArray track by $index" class="meta-dato">
+                      <input type="text" class="form-control.btn" ng-model="editFinalArray[ [[$index]] ].new_data" />
+
+              </div>
+
+    </div>
+    <br>
+    <button type="submit" class="btn btn-infoi btn-sm act-meta" ng-click="update(firstName)" ng-disabled="!exists_equals_data" ng-show="exists_equals_data">Guardar</button>
   </div>
 </div>

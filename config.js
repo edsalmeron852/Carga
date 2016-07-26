@@ -14,7 +14,7 @@
 module.exports = {
   projectId: 'ine-stack2',
   keyFilename: './key.json',
-  bucketName: 'pruebota',
+  bucketName: 'stack-mean',
   cookieSecret: '[cooking signing key]',
   oauth2: {
     clientId: '[Client ID for web application credentials]',

@@ -3822,7 +3822,7 @@ tbody.collapse.in {
   border-collapse: separate;
 }
 .input-group[class*="col-"] {
-  float: none;
+  float: right;;
   padding-right: 0;
   padding-left: 0;
 }

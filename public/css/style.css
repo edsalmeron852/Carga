@@ -22,7 +22,7 @@
 	font-size: 20px;
 	cursor: pointer;
 	opacity: 0;
-	filter: alpha(opacity=0);
+	filter: alpha(opacity=0);   
 }
 .image-preview-input-title {
     margin-left:2px;
@@ -30,3 +30,143 @@
 body{
   background: white;
 }
+
+
+.btn-infoi {
+  color: #fff;
+  background-color: #6F7072;
+  border-color: #6F7072;
+}
+.btn-infoi:focus,
+.btn-infoi.focus {
+  color: #fff;
+  background-color: #9B9C9E;  
+  border-color: #1b6d85;
+}
+.btn-infoi:hover {
+  color: #fff;
+  background-color: #9B9C9E;
+  border-color: #269abc;
+}
+.btn-infoi:active,
+.btn-infoi.active,
+.open > .dropdown-toggle.btn-infoi {
+  color: #fff;
+  background-color: #9B9C9E;
+  border-color: #269abc;
+}
+.btn-infoi:active:hover,
+.btn-infoi.active:hover,
+.open > .dropdown-toggle.btn-infoi:hover,
+.btn-infoi:active:focus,
+.btn-infoi.active:focus,
+.open > .dropdown-toggle.btn-infoi:focus,
+.btn-infoi:active.focus,
+.btn-infoi.active.focus,
+.open > .dropdown-toggle.btn-infoi.focus {
+  color: #fff;
+  background-color: #9B9C9E;
+  border-color: #9B9C9E;
+}
+.btn-dangeri {
+  color: #58585A;
+  background-color: #FFF;
+  border-color: #FFF;
+}   
+
+.btn-dangeri:focus,
+.btn-dangeri.focus {
+  color: #fff;
+  background-color: #9B9C9E;
+  border-color: #9B9C9E;
+}
+.btn-dangeri:hover {
+  color: #fff;
+  background-color: #9B9C9E;
+  border-color: #9B9C9E;
+}
+.btn-dangeri:active,
+.btn-dangeri.active,
+.open > .dropdown-toggle.btn-dangeri {
+  color: #fff;
+  background-color: #c9302c;
+  border-color: #ac2925;
+}
+.btn-dangeri:active:hover,
+.btn-dangeri.active:hover,
+.open > .dropdown-toggle.btn-dangeri:hover,
+.btn-dangeri:active:focus,
+.btn-dangeri.active:focus,
+.open > .dropdown-toggle.btn-dangeri:focus,
+.btn-dangeri:active.focus,
+.btn-dangeri.active.focus,
+.open > .dropdown-toggle.btn-dangeri.focus {
+  color: #fff;
+  background-color: #9B9C9E;
+  border-color: #9B9C9E;
+}
+.btn-dangeri:active,
+.btn-dangeri.active,
+.open > .dropdown-toggle.btn-dangeri {
+  background-image: none;
+}
+.btn-dangeri.disabled:hover,
+.btn-dangeri[disabled]:hover,
+fieldset[disabled] .btn-dangeri:hover,
+.btn-dangeri.disabled:focus,
+.btn-dangeri[disabled]:focus,
+fieldset[disabled] .btn-dangeri:focus,
+.btn-dangeri.disabled.focus,
+.btn-dangeri[disabled].focus,
+fieldset[disabled] .btn-dangeri.focus {
+  background-color: #9B9C9E;
+  border-color: #9B9C9E;
+}
+.btn-dangeri .badge {
+  color: #d9534f;
+  background-color: #fff;
+}
+.act-meta{
+  float: right;
+}
+
+.meta{
+  padding-bottom: 20px;
+  border: 5px solid #ffffff;
+  text-align-last: left;
+  background:  #ffffff;
+  padding: 10px 41px 30px 0px;
+
+}   
+
+/* Pruebas */
+.div-meta{
+  border: 5px solid #F5F5F6;
+  padding-top: 0px;
+  display: block;
+  background: #F5F5F6;
+  padding: 0px 14px 15px 14px;
+}
+
+.act-meta{
+  float: right;
+}
+a {
+    color: #9A9A9A;
+    text-decoration: none;
+}
+
+.meta-dato {
+    padding-bottom: 8px;
+}
+.bg-primaryi {
+    color: #6F7072;
+    background-color: #F5F5F6;
+}   
+
+
+.form-pading{
+  padding: 0 0 0 0;
+}
+
+

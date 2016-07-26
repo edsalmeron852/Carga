@@ -34,7 +34,7 @@ $(function() {
         $('.image-preview-filename').val("");
         $('.image-preview-clear').hide();
         $('.image-preview-input input:file').val("");
-        $(".image-preview-input-title").text("Browse");
+        $(".image-preview-input-title").text("Archivos");
     });
     // Create the preview image
     $(".image-preview-input input:file").change(function (){
@@ -48,7 +48,7 @@ $(function() {
         console.log(this.files);
         // Set preview image into the popover data-content
         //reader.onload = function (e) {
-            $(".image-preview-input-title").text("Change");
+            $(".image-preview-input-title").text("Modificar");
             $(".image-preview-clear").show();
             $(".image-preview-filename").val("Archivos: "+file);
           //  img.attr('src', e.target.result);
