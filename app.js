@@ -18,7 +18,7 @@ var storage = gcloud.storage({
 var bucket = storage.bucket(config.bucketName);
 
 
-//Credenciales de Cloudinary, para subir
+//Credenciales de Cloudinary
 cloudinary.config({
   cloud_name: "lalo-s" ,
   api_key: "972562558254943" ,
@@ -157,7 +157,6 @@ bucket.upload(file.path, function(err, files) {
 ///Listar archivos
 app.get('/archivos', function(req, res) {
     Archivo.find(function(err, archivos) {
-        if (err) console.log(err);
         return res.jsonp(archivos);
     });
 
@@ -169,7 +168,6 @@ app.get('/archivos/:id', function(req, res) {
     Archivo.findOne({
         "_id": id
     }, function(err, archivo) {
-        console.log('Contenido: ' + archivo);
         res.render('editar', {
             archivo: archivo
         });
@@ -179,8 +177,7 @@ app.get('/archivos/:id', function(req, res) {
 //Actualizar Archivos
 
 app.put('/archivos', function(req, res) {
-    console.log('put');
-    console.log(req.body);
+
     var data = {
         descripcion: req.body.descripcion
     }
@@ -205,11 +202,10 @@ Archivo.update({"_id": req.params.id}, data, function (err, archivo) {
 //Eliminar archivos
 app.delete('/archivos/:id', function(req, res) {
     var id = req.params.id;
-    console.log('delete');
+
     Archivo.findOneAndRemove({
         "_id": id
     }, function(err, archivo) {
-        if (err) return console.log(err);
         return res.jsonp(archivo);
     });
 

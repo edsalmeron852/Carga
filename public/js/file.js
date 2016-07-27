@@ -45,7 +45,7 @@ $(function() {
         });
         var file = this.files.length;
         var reader = new FileReader();
-        console.log(this.files);
+        
         // Set preview image into the popover data-content
         //reader.onload = function (e) {
             $(".image-preview-input-title").text("Modificar");

@@ -26,7 +26,7 @@ angular.module('appPrueba')
         $scope.setDelete = function(obj) {
             $scope.toDelete = obj;
         };
-        /////
+      
 
         $scope.deleteTodo = function(id) {
             $http.delete('/archivos/' + id._id)
