@@ -186,8 +186,6 @@ angular.module('appPrueba')
         }
 
         //Array of Id's
-        $scope.meta = {};
-        $scope.meta.desc = [];
         $scope.getIndex = function(obj, isTrue) {
             $scope.meta.ids = "";
             if (isTrue) {
