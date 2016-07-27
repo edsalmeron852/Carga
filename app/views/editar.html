@@ -1,22 +1,16 @@
 {% extends 'layout.html' %}
-
 {% block head %}
-
-  {% parent %}
-
+{% parent %}
 {% endblock %}
-
 {% block content %}
-<h1>Editar</h1>
 
+<h1>Editar</h1>
 <div class="form">
     <form action="archivos/edit" method="put" enctype="multipart/form-data" >
-
-      <input type="file"  name="files">
-    	<textarea placeholder="Tus metadatos" name='descripcion'> {{archivo.descripcion}}</textarea>
-      <input type="submit" value="Enviar">
+  		<input type="file"  name="files">
+			<textarea placeholder="Tus metadatos" name='descripcion'> {{archivo.descripcion}}</textarea>
+  		<input type="submit" value="Enviar">
     </form>
-
 </div>
 
 {% endblock %}

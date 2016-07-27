@@ -177,22 +177,9 @@ angular.module('appPrueba')
 
 
         //Show menus
-
         $scope.MostrarOcultarController = function($scope) {
             $scope.menuState = {}
             $scope.menuState.show = false;
-
-            $scope.cambiarMenu = function() {
-                $scope.menuState.show = !$scope.menuState.show;
-            };
-        }
-
-
-        $scope.MostrarOcultarController2 = function($scope) {
-
-            $scope.menuState = {}
-            $scope.menuState.show = false;
-
             $scope.cambiarMenu = function() {
                 $scope.menuState.show = !$scope.menuState.show;
             };

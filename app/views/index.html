@@ -1,13 +1,16 @@
-{% extends 'layout.html' %} {% block head %} {% parent %} {% endblock %} {% block content %}
+{% extends 'layout.html' %} 
+{% block head %} 
+{% parent %} 
+{% endblock %} 
+{% block content %}
+
 <div class="container">
     <h2>Administrador de Archivos</h2>
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#home">Archivos</a></li>
         <li><a data-toggle="tab" href="#menu1">Agregar</a></li>
     </ul>
-
     <div class="tab-content">
-
         <div id="home" class="tab-pane fade in active">
             <div>
                 <!--Lista de archivos -->
@@ -15,15 +18,12 @@
             </div>
         </div>
         <div id="menu1" class="tab-pane fade">
-          <div >
-
-          </div>
             <!--Subir N archivos -->
             {% include "./parciales/subirN.html" %}
-
         </div>
-        <!-- modal eliminar! -->
-        {% include "./parciales/eliminar.html" %}
+            <!-- modal eliminar! -->
+            {% include "./parciales/eliminar.html" %}
     </div>
 </div>
+
 {% endblock %}
