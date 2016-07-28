@@ -5,10 +5,8 @@ var async = require("async");
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var multer = require('multer');
-var cloudinary = require('cloudinary');
 var config = require('./config');
 var gcloud = require('gcloud');
-var colors = require('colors');
 ///Petición de Credenciales a config.js
 var storage = gcloud.storage({
         projectId: config.projectId,
@@ -17,13 +15,6 @@ var storage = gcloud.storage({
 
 var bucket = storage.bucket(config.bucketName);
 
-
-//Credenciales de Cloudinary
-cloudinary.config({
-  cloud_name: "lalo-s" ,
-  api_key: "972562558254943" ,
-  api_secret:"mtQ8_Ida_SdQWaEe7I7H5VO92j0"
-});
 
 //Multer tratamiento de archivos
 var storage	=	multer.diskStorage({
@@ -40,6 +31,7 @@ var middleware_upload = multer({ storage : storage }).array('files',99);
 
 
 //Conexion mongo
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/myapp');
 //Esquema del modelo
 var archivoSchema = {
@@ -77,46 +69,6 @@ app.use(methodOverride(function(req, res) {
 app.get('/', function(req, res) {
     res.render('index');
 });
-//////////////////
-
-//Crear Archivos
-/*
-app.post('/archivos', middleware_upload, function(req, res) {
-    async.each(req.files, function(file, callback) {
-  // async.forEachOf(req.files, function(value, key, callback) {
-console.log(req.files);
-cloudinary.uploader.upload(file.path, function(result) {
-  console.log(req.body)
-
-  var data = {
-      path: result.url,
-      mimetype: file.mimetype,
-      originalname: file.originalname,
-      descripcion: req.body.descripcion,
-      autor: req.body.autor,
-      subtema: req.body.subtema
-
-  }
-
-  var archivo = new Archivo(data);
-  archivo.save(function(err) {
-      if (err) return callback(err);
-      callback(null);
-
-  });
-
-});
-
-
-    }, function(err) {
-        if (err) console.error(err.message);
-        // configs is now a map of JSON data
-        res.redirect('/')
-    })
-
-});
-
-*/
 
 app.post('/archivos', middleware_upload, function(req, res) {
     async.each(req.files, function(file, callback) {
@@ -188,18 +140,7 @@ app.put('/archivos', function(req, res) {
        res.send("actualizado")
     });
 });
-/*
-app.put('/archivos/:id', function (req, res) {
 
-var data = {
-  descripcion: req.body._id
-};
-console.log(req.body);
-Archivo.update({"_id": req.params.id}, data, function (err, archivo) {
-    res.status(200).jsonp(archivo);
-});
-});*/
-//Eliminar archivos
 app.delete('/archivos/:id', function(req, res) {
     var id = req.params.id;
 

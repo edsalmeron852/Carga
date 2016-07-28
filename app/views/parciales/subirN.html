@@ -6,7 +6,7 @@
     <div ng-controller='MostrarOcultarController' align="left">
       <input ng-click='cambiarMenu()' type="radio" name="option" id="radio1" checked /> Plantilla de metadatos 1
       <input ng-click='cambiarMenu()' type="radio" name="option" id="radio2"/> Plantilla de metadatos 2
-      
+
       <!-- Plantilla 1-->
       <ul ng-hide='menuState.show' class="form-pading">
         <div class="form">
@@ -15,18 +15,18 @@
                   <br>
                   <h4 class="plantilla">Descripción</h4>
                   <input rows="12" class="form-control input-sm" placeholder="Descripción" ng-model="descripcion" name='descripcion' value='{{archivo.descripcion}}' required><br>
-                  
+
                   <h4 class="plantilla">Autor</h4>
                   <input rows="12" class="form-control input-sm" placeholder="Autor" ng-model="autor" name='autor'  required><br>
-                  
+
                   <h4 class="plantilla">Fecha</h4>
                   <input rows="12" class="form-control input-sm" placeholder="Fecha" ng-model="fecha" name='fecha' value='{{archivo.fecha}}'><br>
-                  
+
                   <h4 class="plantilla">Subtema</h4>
                   <input rows="12" class="form-control input-sm" placeholder="Subtema" ng-model="subtema" name='subtema' value='{{archivo.subtema}}'><br>
-                  
+
                   <p ng-if="subirN.descripcion.$error.required && subirN.descripcion.$touched" class="help-block">*Los metadatos son requeridos</p>
-              </div>  
+              </div>
 
               <!-- image-preview-filename input [CUT FROM HERE]-->
               <div class="input-group image-preview relleno-top">
@@ -56,7 +56,7 @@
         <div class="form">
             <form name="subirN" action="archivos" method="post" enctype="multipart/form-data">
               <div ng-class="{'has-error':subirN.descripcion.$error.required && subirN.descripcion.$touched}" border="2px">
-​                  
+​
                   <h4 class="plantilla">Descripción</h4>
                   <input rows="12" class="form-control input-sm" placeholder="Descripción" ng-model="descripcion" name='descripcion' value='{{archivo.descripcion}}' required><br>
 ​
@@ -97,4 +97,4 @@
       </ul>
     </div>
 </div>
-​<div class="col-lg-4"></div>  
+​<div class="col-lg-4"></div>
