@@ -6,21 +6,21 @@ var nodemon = require('gulp-nodemon');
 var jshint = require('gulp-jshint');
 
 /**
- * Gulp Tasks
- */
- var paths = {
-   styles: ['./public/css/*.css'],
-   html: ['./app/views/**/*.html'],
-   scripts: ['./public/js/controller.js']
- }
+* Gulp Tasks
+*/
+var paths = {
+  styles: ['./public/css/*.css'],
+  html: ['./app/views/**/*.html'],
+  scripts: ['./public/js/controller.js']
+}
 
- gulp.task('scripts', function() {
-     gulp.src(paths.scripts)
-         //Verificamos que no tengan problemas en la escritura/semantica
-         .pipe(jshint())
-         .pipe(jshint.reporter('default'))
+gulp.task('scripts', function() {
+  gulp.src(paths.scripts)
+  //Verificamos que no tengan problemas en la escritura/semantica
+  .pipe(jshint())
+  .pipe(jshint.reporter('default'))
 
- });
+});
 
 
 gulp.task('browser-sync', ['nodemon'], function() {
