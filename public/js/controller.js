@@ -1,5 +1,7 @@
 angular.module('appPrueba')
-    .controller("padreCtrl", ["$scope", "$http", function($scope, $http) {
+.controller("padreCtrl", ["$scope", "$http",  function($scope, $http) {
+
+
 
         $scope.archivos = [];
         $scope.editFiles = [];

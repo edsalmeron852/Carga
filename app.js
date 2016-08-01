@@ -30,6 +30,7 @@ app.get('/', function(req, res) {
 });
 
 app.post('/archivos', middleware_upload, function(req, res) {
+  console.log(req );
   async.each(req.files, function(file, callback) {
     bucket.upload(file.path, function(err, files) {
       var data = {
