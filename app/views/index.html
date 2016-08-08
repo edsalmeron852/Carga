@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+<nod></nod>{% extends 'layout.html' %}
 {% block head %}
 {% parent %}
 {% endblock %}
@@ -14,15 +14,15 @@
         <div id="home" class="tab-pane fade in active">
             <div>
                 <!--Lista de archivos -->
-                {% include "./parciales/archivos.html" %}
+                {% include "./sesiones/archivos.html" %}
             </div>
         </div>
         <div id="menu1" class="tab-pane fade">
             <!--Subir N archivos -->
-            {% include "./parciales/subirN.html" %}
+            {% include "./sesiones/subirN.html" %}
         </div>
             <!-- modal eliminar! -->
-            {% include "./parciales/eliminar.html" %}
+            {% include "./sesiones/eliminar.html" %}
     </div>
 </div>
 

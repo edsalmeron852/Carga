@@ -1,5 +1,5 @@
-angular.module('appPrueba')
-.controller("padreCtrl", ["$scope", "$http",  function($scope, $http) {
+angular.module("appPrueba")
+    .controller("padreCtrl", ["$scope", "$http", 'Upload', '$timeout', function($scope, $http, Upload, $timeout) {
 
 
 
@@ -15,14 +15,51 @@ angular.module('appPrueba')
 
 
         $scope.getArchivos = function() {
-            $http.get("/archivos")
+            $http.get("/archivos/sesiones")
                 .success(function(data) {
+
                     $scope.archivos = data;
                 })
                 .error(function(err) {
 
                 });
         };
+        //post
+        $scope.uploadFiles = function(files, errFiles) {
+          console.log($scope.enllace);
+            $scope.files = files;
+            $scope.errFiles = errFiles;
+            angular.forEach(files, function(file) {
+                file.upload = Upload.upload({
+                    url: '/archivos/sesiones',
+                    data: {
+                        files: file,
+                        tipo_sesion: ''+$scope.tipo_sesion,
+                        numero_sesion: ''+$scope.numero_sesion,
+                        fecha_sesion: ''+$scope.fecha_sesion,
+                        metadatos: ''+$scope.metadatos,
+                        datos_enlaceweb: ''+$scope.datos_enlaceweb,
+                        datos_responsable: ''+$scope.datos_responsable
+
+                    }
+                });
+
+                file.upload.then(function(response) {
+                    $timeout(function() {
+                        file.result = response.data;
+                        console.log(file.result);
+                    });
+                }, function(response) {
+                    if (response.status > 0)
+                        $scope.errorMsg = response.status + ': ' + response.data;
+                }, function(evt) {
+                    file.progress = Math.min(100, parseInt(100.0 *
+                        evt.loaded / evt.total));
+
+                });
+            });
+        };
+
         // set obj to delete
 
         $scope.setDelete = function(obj) {
@@ -31,7 +68,7 @@ angular.module('appPrueba')
 
 
         $scope.deleteTodo = function(id) {
-            $http.delete('/archivos/' + id._id)
+            $http.delete('/archivos/sesiones/' + id._id)
                 .success(function(data) {
                     $scope.getArchivos();
                     toastr.success("Contenido Eliminado");
@@ -65,7 +102,7 @@ angular.module('appPrueba')
                 }
                 $http({
                     method: 'PUT',
-                    url: '/archivos',
+                    url: '/archivos/sesiones',
                     data: x
                 }).then(function successCallback(response) {
                     toastr.success("Contenido Actualizado");

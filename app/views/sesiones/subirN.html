@@ -1,0 +1,99 @@
+<h4>Pantilla Sesiones</h4>
+
+
+<div>
+
+    <md-content layout-padding="">
+        <form name="projectForm">
+
+            <md-input-container class="md-block">
+                <label>Tipo de Sesion</label>
+                <input name="tipo_sesion" required ng-model="tipo_sesion" md-no-asterisk ng-pattern="/\w+/" minlength="9">
+                <div ng-messages="projectForm.tipo_sesion.$error" ng-show="projectForm.tipo_sesion.$touched">
+                    <div ng-message="required">Tipo de sesion es un campo requerido.</div>
+                    <div ng-message="pattern">No se permiten caracteres especiales.</div>
+                    <div ng-message="minlength">El mínimo de caracteres permitidos es 9.</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Número Sesion</label>
+                <input name="numero_sesion" required ng-model="numero_sesion" md-no-asterisk ng-pattern="/[0-9]+/" minlength="1">
+                <div ng-messages="projectForm.numero_sesion.$error" ng-show="projectForm.numero_sesion.$touched">
+                    <div ng-message="required">Número de sesion es un campo requerido.</div>
+                    <div ng-message="pattern">Solo se permiten números.</div>
+                    <div ng-message="minlength">El mínimo de caracteres permitidos es 1.</div>
+                </div>
+            </md-input-container>
+
+
+            <md-input-container class="md-block">
+                <label>Fecha Sesion</label>
+                <input class="date" name="fecha_sesion" required ng-model="fecha_sesion" md-no-asterisk ng-pattern="/\w+/" minlength="10">
+                <div ng-messages="projectForm.fecha_sesion.$error" ng-show="projectForm.fecha_sesion.$touched">
+                    <div ng-message="required">Fecha de sesion es un campo requerido.</div>
+                    <div ng-message="pattern">Solo se permiten números.</div>
+                    <div ng-message="minlength">El mínimo de caracteres permitidos es 10.</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Metadatos</label>
+                <input name="metadatos" required ng-model="metadatos" md-no-asterisk ng-pattern="/\w+/" minlength="4">
+                <div ng-messages="projectForm.metadatos.$error" ng-show="projectForm.metadatos.$touched">
+                    <div ng-message="required">Metadatos es un campo requerido.</div>
+                    <div ng-message="pattern">No se permiten caracteres especiales.</div>
+                    <div ng-message="minlength">El mínimo de caracteres permitidos es 4.</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Datos enlace web</label>
+                <input name="datos_enlaceweb" required ng-model="datos_enlaceweb" md-no-asterisk ng-pattern="/\w+/" minlength="4">
+                <div ng-messages="projectForm.datos_enlaceweb.$error" ng-show="projectForm.datos_enlaceweb.$touched">
+                    <div ng-message="required">Datos es un campo requerido.</div>
+                    <div ng-message="pattern">No se permiten caracteres especiales.</div>
+                    <div ng-message="minlength">El mínimo de caracteres permitidos es 4.</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Datos responsable web</label>
+                <input name="datos_responsable" required ng-model="datos_responsable" md-no-asterisk ng-pattern="/\w+/" minlength="4">
+                <div ng-messages="projectForm.datos_responsable.$error" ng-show="projectForm.datos_responsable.$touched">
+                    <div ng-message="required">Datos es un campo requerido.</div>
+                    <div ng-message="pattern">No se permiten caracteres especiales.</div>
+                    <div ng-message="minlength">El mínimo de caracteres permitidos es 4.</div>
+                </div>
+            </md-input-container>
+
+        </form>
+    </md-content>
+
+</div>
+<md-button class="md-raised" ngf-select="uploadFiles($files, $invalidFiles)" multiple ngf-pattern="'.pdf,.zip,.xlsx,.docx'" accept="'.pdf,.zip,.xlsx,.docx'" ngf-max-size="100MB">
+<md-icon md-svg-src="lib/material-design-icons/file/svg/production/ic_cloud_upload_48px.svg"></md-icon>
+    archivos
+    </md-button>
+<br>
+<br>
+
+<div class="col-lg-12">
+
+
+    <ul>
+        <li ng-repeat="f in files" style="font:smaller">[[f.name]]
+        <span class="progress" ng-show="f.progress >= 0">
+          <div style="width:[[f.progress]]%"
+          ng-bind="f.progress + '%'"></div>
+        </span>
+        </li>
+        <li ng-repeat="f in errFiles" style="font:smaller">
+            <span ng-if="[[f.$error]] == 'maxSize' "> <b> Tamaño Maximo excedido ( [[f.$errorParam]] ) </b> </span>
+            <span ng-if="[[f.$error]] == 'pattern' "> <b> Formatos aceptados ( [[f.$errorParam]] ) </b></span>
+
+        </li>
+    </ul>
+    [[errorMsg]]
+
+</div>
