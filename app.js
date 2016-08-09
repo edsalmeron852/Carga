@@ -33,8 +33,8 @@ RUTAS SESIONES
  */
 app.post('/archivos/sesiones', middleware_upload, function(req, res) {
     var archivo = new Archivo();
+    console.log(req);
     async.each(req.files, function(file, callback) {
-      console.log(req.files);
         bucket.upload(file.path, function(err, files) {
             if (err) return callback(err);
             documents = {
@@ -48,6 +48,7 @@ app.post('/archivos/sesiones', middleware_upload, function(req, res) {
     }, function(err) {
         //  if (err) console.error(err.message);
         // configs is now a map of JSON data
+            archivo.sesion.user = req.body.user,
             archivo.sesion.tipo_sesion = req.body.tipo_sesion,
             archivo.sesion.numero_sesion = req.body.numero_sesion,
             archivo.sesion.fecha_sesion = req.body.fecha_sesion,
@@ -58,12 +59,13 @@ app.post('/archivos/sesiones', middleware_upload, function(req, res) {
 
         archivo.save(function(err) {
             if (err) return callback(err);
+            console.log("entro save");
+            res.json(archivo);
         });
-        res.redirect('/');
     })
 });
 ///Listar archivos
-app.get('/archivos/sesiones', function(req, res) {
+app.get('/archivos', function(req, res) {
     Archivo.find(function(err, archivos) {
         if(err) return res.status(400).send({message: getErrorMessage(err)});
         return res.jsonp(archivos);
@@ -117,8 +119,8 @@ RUTAS ACUERDOS
  */
 
  app.post('/archivos/sesiones/acuerdos',  middleware_upload, function(req, res) {
-   console.log("entro");
    var archivo = [];
+   console.log(req.body);
    async.each(req.files, function(file, callback) {
        bucket.upload(file.path, function(err, files) {
            if (err) return callback(err);
@@ -132,12 +134,10 @@ RUTAS ACUERDOS
        });
    }, function(err) {
 
-
-
      var data = {
          acuerdos: req.body
      }
-
+     console.log(archivo);
      var ids = req.body.ids.split(" ");
      Archivo.update({
          "_id": {
@@ -146,13 +146,15 @@ RUTAS ACUERDOS
      }, {
          $push: {
              'sesion.acuerdos': {
-               acuerdos_metadatos: data.acuerdos.acuerdos_metadatos,
-               fecha_bd: data.acuerdos.fecha_bd,
                fecha_acuerdo: data.acuerdos.fecha_acuerdo,
+               nombre_sesion: data.acuerdos.nombre_sesion,
+               numero_sesion: data.acuerdos.numero_sesion,
                tema: data.acuerdos.tema,
-               archivo_acuerdos: archivo,
+               acuerdos_metadatos: data.acuerdos.acuerdos_metadatos,
                descripcion_archivo: data.acuerdos.descripcion_archivo,
                titulo: data.acuerdos.titulo,
+               archivo_acuerdos: data.acuerdos.archivo_acuerdos,
+               acuerdos_docs: archivo,
                datos_responsable: data.acuerdos.datos_responsable,
                datos_enlaceWeb: data.acuerdos.datos_enlaceWeb
 
@@ -162,7 +164,7 @@ RUTAS ACUERDOS
          multi: true
      }, function(err, archivo) {
          //res.status(200).jsonp(archivo);
-         res.send("actualizado")
+         res.json(archivo)
      });
 
 

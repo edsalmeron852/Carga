@@ -71,19 +71,24 @@
     </md-content>
 
 </div>
-<md-button class="md-raised" ngf-select="uploadFiles($files, $invalidFiles)" multiple ngf-pattern="'.pdf,.zip,.xlsx,.docx'" accept="'.pdf,.zip,.xlsx,.docx'" ngf-max-size="100MB">
-<md-icon md-svg-src="lib/material-design-icons/file/svg/production/ic_cloud_upload_48px.svg"></md-icon>
-    archivos
+
+<div class="text-right">
+
+    <md-button ng-disabled='projectForm.$invalid' class="md-raised" ngf-select="uploadFiles($files, $invalidFiles)" multiple ngf-pattern="'.pdf,.zip,.xlsx,.docx'" accept="'.pdf,.zip,.xlsx,.docx'" ngf-max-size="100MB">
+        <md-icon md-svg-src="lib/material-design-icons/file/svg/production/ic_cloud_upload_48px.svg"></md-icon>
+        archivos
     </md-button>
-<br>
-<br>
+    <br>
+    <br>
+
+</div>
 
 <div class="col-lg-12">
 
 
     <ul>
         <li ng-repeat="f in files" style="font:smaller">[[f.name]]
-        <span class="progress" ng-show="f.progress >= 0">
+            <span class="progress" ng-show="f.progress >= 0">
           <div style="width:[[f.progress]]%"
           ng-bind="f.progress + '%'"></div>
         </span>

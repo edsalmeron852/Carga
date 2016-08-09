@@ -24,13 +24,16 @@ var archivoSchema = new Schema({
         datos_enlaceweb: String,
         acuerdos: [{
             user: String,
-            fecha_bd: String,
+            fecha_bd: { type: Date, default: Date.now },
             fecha_acuerdo: String,
+            nombre_sesion: String,
+            numero_sesion: String,
             tema: String,
             acuerdos_metadatos: String,
             descripcion_archivo: String,
             titulo: String,
-            archivo_acuerdos: [{
+            archivo_acuerdos: String, 
+            acuerdos_docs: [{
                 path: String,
                 mimetype: String,
                 originalname: String

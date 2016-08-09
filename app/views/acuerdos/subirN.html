@@ -1,0 +1,165 @@
+<h4>Plantilla acuerdos</h4>
+<!--<select ng-model="ids" >
+  <option value="">Sesion</option>
+  <option ng-repeat="x in archivos" value="[[x._id]]" >[[x.sesion.numero_sesion +' Sesion '+x.sesion.tipo_sesion]]</option>
+</select>-->
+
+
+<div class="md-padding selectdemoSelectedText">
+    <div layout="row">
+      <md-input-container>
+        <label>Sesiones</label>
+        <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
+          <md-optgroup label="items">
+            <md-option ng-repeat="x in archivos" value="[[ archivos[$index] ]]" >[[x.sesion.numero_sesion +' Sesion '+x.sesion.tipo_sesion]]</md-option>
+          </md-optgroup>
+        </md-select>
+      </md-input-container>
+    </div>
+
+</div>
+
+
+<div >
+  <md-content layout-padding="">
+      <form name="projectForm">
+
+        <md-input-container class="md-block">
+            <label>Fecha acuerdo</label>
+            <input class="date" name="fecha_acuerdo" required ng-model="fecha_acuerdo" md-no-asterisk ng-pattern="/\w+/" minlength="10">
+            <div ng-messages="projectForm.fecha_acuerdo.$error" ng-show="projectForm.fecha_acuerdo.$touched">
+                <div ng-message="required">Fecha de acuerdo es un campo requerido.</div>
+                <div ng-message="pattern">Solo se permiten números.</div>
+                <div ng-message="minlength">El mínimo de caracteres permitidos es 10.</div>
+            </div>
+        </md-input-container>
+
+
+        <md-input-container class="md-block">
+            <label>Nombre de sesion</label>
+            <input name="nombre_sesion" required ng-model="nombre_sesion" md-no-asterisk ng-pattern="/\w+/" minlength="4">
+            <div ng-messages="projectForm.nombre_sesion.$error" ng-show="projectForm.nombre_sesion.$touched">
+                <div ng-message="required">Número de sesion es un campo requerido.</div>
+                <div ng-message="pattern">No se permiten caracteres especiales.</div>
+                <div ng-message="minlength">El mínimo de caracteres permitidos es 4.</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Número Sesion</label>
+            <input name="numero_sesion" required ng-model="numero_sesion" md-no-asterisk ng-pattern="/[0-9]+/" minlength="1">
+            <div ng-messages="projectForm.numero_sesion.$error" ng-show="projectForm.numero_sesion.$touched">
+                <div ng-message="required">Número de sesion es un campo requerido.</div>
+                <div ng-message="pattern">Solo se permiten números.</div>
+                <div ng-message="minlength">El mínimo de caracteres permitidos es 1.</div>
+            </div>
+        </md-input-container>
+
+
+        <md-input-container class="md-block">
+            <label>Tema</label>
+            <input name="tema" required ng-model="tema" md-no-asterisk ng-pattern="/\w+/" minlength="4">
+            <div ng-messages="projectForm.tema.$error" ng-show="projectForm.tema.$touched">
+                <div ng-message="required">Tema es un campo requerido.</div>
+                <div ng-message="pattern">Solo se permiten números.</div>
+                <div ng-message="minlength">El mínimo de caracteres permitidos es 4.</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Metadatos</label>
+            <input name="acuerdos_metadatos" required ng-model="acuerdos_metadatos" md-no-asterisk ng-pattern="/\w+/" minlength="4">
+            <div ng-messages="projectForm.acuerdos_metadatos.$error" ng-show="projectForm.acuerdos_metadatos.$touched">
+                <div ng-message="required">Metadatos es un campo requerido.</div>
+                <div ng-message="pattern">No se permiten caracteres especiales.</div>
+                <div ng-message="minlength">El mínimo de caracteres permitidos es 4.</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Titulo</label>
+            <input name="titulo" required ng-model="titulo" md-no-asterisk ng-pattern="/\w+/" minlength="4">
+            <div ng-messages="projectForm.titulo.$error" ng-show="projectForm.titulo.$touched">
+                <div ng-message="required">Titulo es un campo requerido.</div>
+                <div ng-message="pattern">No se permiten caracteres especiales.</div>
+                <div ng-message="minlength">El mínimo de caracteres permitidos es 4.</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Descripcion del archivo</label>
+            <input name="descripcion_archivo" required ng-model="descripcion_archivo" md-no-asterisk ng-pattern="/\w+/" minlength="4">
+            <div ng-messages="projectForm.descripcion_archivo.$error" ng-show="projectForm.descripcion_archivo.$touched">
+                <div ng-message="required">Titulo es un campo requerido.</div>
+                <div ng-message="pattern">No se permiten caracteres especiales.</div>
+                <div ng-message="minlength">El mínimo de caracteres permitidos es 4.</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Archivo acuerdos</label>
+            <input name="archivo_acuerdos" required ng-model="archivo_acuerdos" md-no-asterisk ng-pattern="/\w+/" minlength="4">
+            <div ng-messages="projectForm.archivo_acuerdos.$error" ng-show="projectForm.archivo_acuerdos.$touched">
+                <div ng-message="required">Archivo acuerdos es un campo requerido.</div>
+                <div ng-message="pattern">No se permiten caracteres especiales.</div>
+                <div ng-message="minlength">El mínimo de caracteres permitidos es 4.</div>
+            </div>
+        </md-input-container>
+
+
+        <md-input-container class="md-block">
+            <label>Datos enlace web</label>
+            <input name="datos_enlaceWeb" required ng-model="datos_enlaceWeb" md-no-asterisk ng-pattern="/\w+/" minlength="4">
+            <div ng-messages="projectForm.datos_enlaceWeb.$error" ng-show="projectForm.datos_enlaceWeb.$touched">
+                <div ng-message="required">Datos es un campo requerido.</div>
+                <div ng-message="pattern">No se permiten caracteres especiales.</div>
+                <div ng-message="minlength">El mínimo de caracteres permitidos es 4.</div>
+            </div>
+        </md-input-container>
+
+
+          <md-input-container class="md-block">
+              <label>Datos responsable web</label>
+              <input name="datos_responsable" required ng-model="datos_responsable" md-no-asterisk ng-pattern="/\w+/" minlength="4">
+              <div ng-messages="projectForm.datos_responsable.$error" ng-show="projectForm.datos_responsable.$touched">
+                  <div ng-message="required">Datos es un campo requerido.</div>
+                  <div ng-message="pattern">No se permiten caracteres especiales.</div>
+                  <div ng-message="minlength">El mínimo de caracteres permitidos es 4.</div>
+              </div>
+          </md-input-container>
+
+      </form>
+  </md-content>
+
+
+</div>
+<div class="text-right">
+
+    <md-button ng-disabled='projectForm.$invalid' class="md-raised" ngf-select="uploadFiles($files, $invalidFiles)" multiple ngf-pattern="'.pdf,.zip,.xlsx,.docx'" accept="'.pdf,.zip,.xlsx,.docx'" ngf-max-size="100MB">
+        <md-icon md-svg-src="lib/material-design-icons/file/svg/production/ic_cloud_upload_48px.svg"></md-icon>
+        archivos
+    </md-button>
+    <br>
+    <br>
+
+</div>
+
+<div class="col-lg-12">
+
+
+    <ul>
+        <li ng-repeat="f in files" style="font:smaller">[[f.name]]
+            <span class="progress" ng-show="f.progress >= 0">
+          <div style="width:[[f.progress]]%"
+          ng-bind="f.progress + '%'"></div>
+        </span>
+        </li>
+        <li ng-repeat="f in errFiles" style="font:smaller">
+            <span ng-if="[[f.$error]] == 'maxSize' "> <b> Tamaño Maximo excedido ( [[f.$errorParam]] ) </b> </span>
+            <span ng-if="[[f.$error]] == 'pattern' "> <b> Formatos aceptados ( [[f.$errorParam]] ) </b></span>
+
+        </li>
+    </ul>
+    [[errorMsg]]
+
+</div>
